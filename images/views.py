@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework import viewsets
-from serializers import SiteSerializer, ImageSerializer, SiteDetailSerializer
-from images.models import Sites, Images
+from serializers import SiteSerializer, ImageSerializer
+from models import Images, Sites
 
 from rest_framework.pagination import PageNumberPagination
 import django_filters.rest_framework
