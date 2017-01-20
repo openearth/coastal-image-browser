@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from rest_framework.reverse import reverse, reverse_lazy
+
 
 # Create your models here.
 
@@ -33,7 +35,7 @@ class Images(models.Model):
 
     @property
     def url(self):
-        return 'http://argus-public.deltares.nl/sites%s' % self.location
+        return '%s/sites%s' % ('', self.location)
 
     class Meta:
         managed = False

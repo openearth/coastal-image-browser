@@ -90,3 +90,6 @@ ENV/
 
 # MySQL .cnf files
 .my*.cnf
+
+# sqlite3 files
+*.sqlite3

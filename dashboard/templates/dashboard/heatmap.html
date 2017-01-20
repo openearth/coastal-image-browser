@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load highcharts_tags %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heatmap</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js" type="text/javascript"></script>
+    {% highcharts_js 1 0 0 1 %}
+    <script type="text/javascript">
+        $(document).ready(
+            $(function () {
+                $.getJSON("{% url 'json-heatmap' %}", function(data) {
+                    $('#container').highcharts(data);
+                });
+            })
+
+        )
+    </script>
+</head>
+<body>
+   <div id="container" style="height: 400px; min-width: 310px; max-width: 1200px; margin: 0 auto"></div>
+</body>
+</html>

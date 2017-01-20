@@ -19,7 +19,7 @@ class LargeResultsSetPagination(PageNumberPagination):
 
 
 class ImageViewSet(viewsets.ModelViewSet):
-    queryset = Images.objects.filter(inarchive=1)
+    queryset = Images.objects.all()#filter(inarchive=1)
     serializer_class = ImageSerializer
     http_method_names = ['get',]
     pagination_class = LargeResultsSetPagination

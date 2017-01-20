@@ -31,7 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dashboard',
     'images',
+    'highcharts',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
