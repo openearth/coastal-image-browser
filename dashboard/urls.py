@@ -1,10 +1,9 @@
 from django.conf.urls import url
-from django.views.generic import TemplateView
 
+from views import IndexView, HeatMap
 
-from . import views
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='dashboard/heatmap.html'), name='heatmap'),
-    url(regex='^json/heatmap$', view=views.HeatMap.as_view(), name='json-heatmap'),
+    url(r'^(?P<site>[a-z]+)?$', IndexView.as_view(), name='heatmap-site'),
+    url(regex='^json/heatmap/(?P<site>[a-z]+)$', view=HeatMap.as_view(), name='json-heatmap'),
 ]

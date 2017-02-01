@@ -25,7 +25,7 @@ router.register(r'sites', SiteViewSet)
 router.register(r'images', ImageViewSet)
 
 urlpatterns = [
-    url(r'', include('dashboard.urls')),
+    url(r'^dashboard/', include('dashboard.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
 #    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
