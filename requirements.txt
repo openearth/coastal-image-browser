@@ -1,6 +1,6 @@
-Django==1.11.2
-djangorestframework==3.6.3
-Markdown==2.6.8       # Markdown support for the browsable API.
+Django==1.11.5
+djangorestframework==3.6.4
+Markdown==2.6.9       # Markdown support for the browsable API.
 django-filter==1.0.4  # Filtering support
 django-highcharts==0.1.7
-pandas==0.20.2
+pandas==0.20.3
