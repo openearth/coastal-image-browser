@@ -11,6 +11,10 @@ Install mysqldb, e.g. in Ubuntu:
 ```sh
 $ sudo apt-get install python-mysqldb
 ```
+Or in CentOS:
+```sh
+$ sudo yum install MySQL-python
+```
 
 Create virtualenv
 
