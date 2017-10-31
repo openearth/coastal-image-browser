@@ -33,10 +33,6 @@ class Images(models.Model):
     dayminute = models.SmallIntegerField(blank=True, null=True)
     inarchive = models.IntegerField(blank=True, null=True)
 
-    @property
-    def url(self):
-        return '%s/sites%s' % ('', self.location)
-
     class Meta:
         managed = False
         db_table = 'Images'
