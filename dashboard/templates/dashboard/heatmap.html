@@ -12,7 +12,7 @@
         $(document).ready(
             $(function () {
                 $.getJSON("{% url 'json-heatmap' view.site %}", function(data) {
-                    $('#container').highcharts(data);
+                    $('#container').highcharts(data, "text");
                 });
             })
 
