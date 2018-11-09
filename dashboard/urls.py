@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from views import IndexView, HeatMap
+from .views import IndexView, HeatMap
 
 
 urlpatterns = [
