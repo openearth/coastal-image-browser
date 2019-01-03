@@ -28,7 +28,7 @@ Install requirements
 $ pip install -r requirements.txt
 ```
 
-Create a ```.my-images.cnf``` file
+Create a ```.my-images.cnf``` file using ```.my-images.cnf.tmpl``` as a template
 
 Run application
 ```sh
