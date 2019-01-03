@@ -70,7 +70,7 @@ class HeatMap(HighChartsHeatMapView):
         epoch__gte = (self.get_dates()[0] - self.epoch).total_seconds()
         query = Images.objects.filter(site=self.site, epoch__gte=epoch__gte)
         aggregate = query.aggregate(Max('camera'))
-        return range(1, aggregate['camera__max']+1)
+        return list(range(1, aggregate['camera__max']+1))
 
     @property
     def yaxis(self):
