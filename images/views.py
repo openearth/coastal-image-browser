@@ -13,8 +13,12 @@ from django.db.models import Max
 
 # obtain site choices from site table
 SITE_CHOICES = Sites.objects.values_list('site', 'description')
-# construct camera choices ranging from 1 to the maximum camera number (because distinct is not supported by the database backend)
-CAMERA_CHOICES = [(cam_num, cam_num) for cam_num in range(1, Images.objects.values('camera').aggregate(Max('camera'))['camera__max']+1)]
+# construct image type choices, using list comprehension and set because distinct is not supported by the database backend
+IMAGE_TYPE_CHOICES = [(image_type, image_type) for image_type in set(Images.objects.values_list('image_type', flat=True))]
+# construct camera choices, using list comprehension and set because distinct is not supported by the database backend
+CAMERA_CHOICES = [(cam_num, cam_num) for cam_num in set(Images.objects.values_list('camera', flat=True))]
+# construct camera choices, using list comprehension and set because distinct is not supported by the database backend
+DAY_MINUTE_CHOICES = [(day_minute, "{}  ({}:{:02d})".format(day_minute, day_minute//60, day_minute%60)) for day_minute in sorted(set(Images.objects.values_list('day_minute', flat=True)))]
 
 
 # for documentation purposes: the docstring is used as title in the API root view
@@ -35,11 +39,13 @@ class ImageFilter(FilterSet):
     Image filter class to provide sensible choices
     """
     site = ChoiceFilter(choices=SITE_CHOICES)
+    image_type = ChoiceFilter(choices=IMAGE_TYPE_CHOICES)
     camera = ChoiceFilter(choices=CAMERA_CHOICES)
+    day_minute = ChoiceFilter(choices=DAY_MINUTE_CHOICES)
 
     class Meta:
         model = Images
-        fields = ('site', 'camera', 'dayminute', 'epoch')
+        fields = ('site', 'image_type', 'camera', 'day_minute', 'epoch')
 
 
 # ViewSets define the view behavior.

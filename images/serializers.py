@@ -31,6 +31,6 @@ class ImageSerializer(serializers.ModelSerializer):
             'site',
             'epoch',
             'camera',
-            'type',
-            'dayminute',
+            'image_type',
+            'day_minute',
         )

@@ -29,8 +29,8 @@ class Images(models.Model):
     site = models.CharField(max_length=16)
     epoch = models.IntegerField()
     camera = models.IntegerField()
-    type = models.CharField(max_length=16)
-    dayminute = models.SmallIntegerField(blank=True, null=True)
+    image_type = models.CharField(db_column='type', max_length=16)
+    day_minute = models.SmallIntegerField(db_column='dayminute', blank=True, null=True)
     inarchive = models.IntegerField(blank=True, null=True)
 
     class Meta:
