@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -90,6 +91,12 @@ DATABASES = {
         },
     }
 }
+
+
+IS_TESTING = False
+if 'test' in sys.argv:
+    del DATABASES['images']
+    IS_TESTING = True
 
 DATABASE_ROUTERS = ['main.router.PrimaryReplicaRouter',]
 
