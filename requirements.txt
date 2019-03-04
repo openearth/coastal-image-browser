@@ -1,5 +1,5 @@
-Django==2.1.6
-djangorestframework==3.9.1
+Django==2.1.7
+djangorestframework==3.9.2
 Markdown==3.0.1 # Markdown support for the browsable API.
 django-filter==2.1.0 # Filtering support
 git+https://github.com/ernestoarbitrio/django-highcharts.git
