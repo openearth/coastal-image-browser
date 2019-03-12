@@ -8,7 +8,7 @@ jobs:
       - checkout  # checkout source code to working directory
       - run:
           command: |  # install dependencies
-            pip install -r requirements.txt
+            sudo pip install -r requirements.txt
       - run:
           command: |
             python manage.py test
