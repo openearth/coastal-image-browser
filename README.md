@@ -19,11 +19,6 @@ $ sudo yum install MySQL-python
 
 Create virtualenv
 
-Enable global site packages in order to use the system mysqldb
-```sh
-$ toggleglobalsitepackages
-```
-
 Install requirements
 ```sh
 $ pip install -r requirements.txt
