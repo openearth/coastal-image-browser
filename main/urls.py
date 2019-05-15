@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 
 from rest_framework import routers
-from images.views import SiteViewSet, ImageViewSet, ImagesAPIRootView
+from images.views import SiteViewSet, ImageViewSet, ImagesAPIRootView, MostRecentImageViewSet
 
 # Routers for REST API
 class ImagesRouter(routers.DefaultRouter):
@@ -28,6 +28,7 @@ class ImagesRouter(routers.DefaultRouter):
 router = ImagesRouter()
 router.register(r'sites', SiteViewSet)
 router.register(r'images', ImageViewSet)
+router.register(r'images_mostrecent', MostRecentImageViewSet, base_name='Images')
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/api/')),
