@@ -5,6 +5,12 @@ from images.models import Images, Sites
 
 class ViewTests(TestCase):
 
+    @classmethod
+    def setUpTestData(cls):
+        # Set up non-modified objects used by all test methods
+        cls.sites = Images.objects.create(location='test.jpg', site='zandmotor', epoch=0, camera=1, image_type='snap', day_minute=0, inarchive=1)
+
+
     def SetUp(self):
         pass
 
