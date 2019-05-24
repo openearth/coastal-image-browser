@@ -24,7 +24,6 @@ class HomePageView(TemplateView):
         epoch__gte = epoch__gte - epoch__gte%60 # floor epoch__gte to minutes
         images = Images.objects.filter(inarchive=1, epoch__gte=epoch__gte, image_type='snap').order_by('-camera')
         context['image_urls'] = ['/sites'+image.location for image in images]
-        context['image_urls'] = ['https://argus.citg.tudelft.nl/sites'+image.location for image in images]
         context['datetime'] = datetime.datetime.utcfromtimestamp(epoch__gte).strftime('%Y-%m-%d %H:%M:%S UTC')
         context['site'] = images[0].site
         return context
