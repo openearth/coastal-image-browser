@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         .sectionHeight {
-            height:100vh;
+            max-height:100vh;
         }
     </style>
 </head>
@@ -21,9 +21,10 @@
         </ol>
         <div class="carousel-inner sectionHeight">
             {% for image_url in image_urls %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="carousel-item sectionHeight {% if forloop.first %}active{% endif %}">
                     <img src="{{ image_url }}" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block sectionHeight">
+                    <!--div class="carousel-caption d-none d-md-block"-->
+                    <div class="carousel-caption d-md-block">
                         <h5>{{ site }}</h5>
                         <p>{{ datetime }}</p>
                     </div>
