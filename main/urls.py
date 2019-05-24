@@ -29,7 +29,6 @@ router.register(r'sites', SiteViewSet)
 router.register(r'images', ImageViewSet)
 router.register(r'images_mostrecent', MostRecentImageViewSet, base_name='Images')
 
-
 urlpatterns = [
     url(r'^$', HomePageView.as_view()),
     url(r'^dashboard/', include('dashboard.urls')),

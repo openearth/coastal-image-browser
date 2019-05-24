@@ -75,7 +75,7 @@ class MostRecentImageFilter(FilterSet):
 
     class Meta:
         model = Images
-        fields = ('site', 'image_type', 'camera', 'day_minute')
+        fields = ('site', 'image_type', 'camera')
 
 
 # ViewSets define the view behavior.
