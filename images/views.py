@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from rest_framework import viewsets, routers
+from rest_framework import generics, viewsets, routers
 from .serializers import SiteSerializer, ImageSerializer
 from .models import Images, Sites
 
@@ -10,6 +10,23 @@ from rest_framework.pagination import PageNumberPagination
 from django_filters import FilterSet, ChoiceFilter, rest_framework
 from django.db.models import Max
 
+
+import datetime
+from django.views.generic.base import TemplateView
+
+class HomePageView(TemplateView):
+
+    template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        epoch__gte = Images.objects.filter(inarchive=1).order_by('-epoch')[0].epoch
+        epoch__gte = epoch__gte - epoch__gte%60 # floor epoch__gte to minutes
+        images = Images.objects.filter(inarchive=1, epoch__gte=epoch__gte, image_type='snap').order_by('-camera')
+        context['image_urls'] = ['/sites'+image.location for image in images]
+        context['datetime'] = datetime.datetime.utcfromtimestamp(epoch__gte).strftime('%Y-%m-%d %H:%M:%S UTC')
+        context['site'] = images[0].site
+        return context
 
 # obtain site choices from site table
 SITE_CHOICES = Sites.objects.values_list('site', 'description')
