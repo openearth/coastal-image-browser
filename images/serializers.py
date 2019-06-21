@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from images.models import Sites, Images
+from images.models import Sites, Images, MostRecentImages
 
 
 # Serializers define the API representation.
@@ -34,3 +34,16 @@ class ImageSerializer(serializers.ModelSerializer):
             'image_type',
             'day_minute',
         )
+
+class MostRecentImageSerializer(ImageSerializer):
+
+    class Meta:
+        model = MostRecentImages
+        fields = (
+                'url',
+                'site',
+                'epoch',
+                'camera',
+                'image_type',
+                )
+

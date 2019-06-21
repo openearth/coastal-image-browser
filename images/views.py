@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework import generics, viewsets, routers
-from .serializers import SiteSerializer, ImageSerializer
-from .models import Images, Sites
+from .serializers import SiteSerializer, ImageSerializer, MostRecentImageSerializer
+from .models import Images, Sites, MostRecentImages
 
 from rest_framework.pagination import PageNumberPagination
 from django_filters import FilterSet, ChoiceFilter, rest_framework
@@ -20,11 +20,10 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        epoch__gte = Images.objects.filter(inarchive=1).order_by('-epoch')[0].epoch
-        epoch__gte = epoch__gte - epoch__gte%60 # floor epoch__gte to minutes
-        images = Images.objects.filter(inarchive=1, epoch__gte=epoch__gte, image_type='snap').order_by('-camera')
+        images = MostRecentImages.objects.filter(image_type='snap').order_by('-camera')
         context['image_urls'] = ['/sites'+image.location for image in images]
-        context['datetime'] = datetime.datetime.utcfromtimestamp(epoch__gte).strftime('%Y-%m-%d %H:%M:%S UTC')
+        epoch = Images.objects.filter(location=images[0].location).first().epoch
+        context['datetime'] = datetime.datetime.utcfromtimestamp(epoch).strftime('%Y-%m-%d %H:%M UTC')
         context['site'] = images[0].site
         return context
 
@@ -74,7 +73,7 @@ class MostRecentImageFilter(FilterSet):
     camera = ChoiceFilter(choices=CAMERA_CHOICES)
 
     class Meta:
-        model = Images
+        model = MostRecentImages
         fields = ('site', 'image_type', 'camera')
 
 
@@ -104,15 +103,10 @@ class MostRecentImageViewSet(viewsets.ModelViewSet):
     list:
     List most recent images
     """
+    queryset = MostRecentImages.objects.all()
 
-    def get_queryset(self):
-        epoch__gte = Images.objects.filter(inarchive=1).order_by('-epoch')[0].epoch
-        epoch__gte = epoch__gte - epoch__gte%60 # floor epoch__gte to minutes
-        return Images.objects.filter(inarchive=1, epoch__gte=epoch__gte)
-
-    serializer_class = ImageSerializer
+    serializer_class = MostRecentImageSerializer
     http_method_names = ['get',]
-    pagination_class = LargeResultsSetPagination
     filter_backends = (rest_framework.DjangoFilterBackend,)
     filter_class = MostRecentImageFilter
     ordering_fields = ('site', 'camera')
