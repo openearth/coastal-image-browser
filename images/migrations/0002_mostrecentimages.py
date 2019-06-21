@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('location', models.CharField(max_length=128, primary_key=True, serialize=False)),
                 ('site', models.CharField(max_length=16)),
+                ('epoch', models.IntegerField()),
                 ('camera', models.IntegerField()),
                 ('image_type', models.CharField(db_column='type', max_length=16)),
             ],
