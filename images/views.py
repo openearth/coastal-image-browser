@@ -48,6 +48,19 @@ class ImageFilter(FilterSet):
         fields = ('site', 'image_type', 'camera', 'day_minute', 'epoch')
 
 
+class MostRecentImageFilter(FilterSet):
+    """
+    Image filter class to provide sensible choices
+    """
+    site = ChoiceFilter(choices=SITE_CHOICES)
+    image_type = ChoiceFilter(choices=IMAGE_TYPE_CHOICES)
+    camera = ChoiceFilter(choices=CAMERA_CHOICES)
+
+    class Meta:
+        model = Images
+        fields = ('site', 'image_type', 'camera')
+
+
 # ViewSets define the view behavior.
 
 
@@ -65,6 +78,27 @@ class ImageViewSet(viewsets.ModelViewSet):
     filter_backends = (rest_framework.DjangoFilterBackend,)
     filter_class = ImageFilter
     ordering_fields = ('site', 'camera', 'epoch')
+
+
+class MostRecentImageViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows images to be viewed
+
+    list:
+    List most recent images
+    """
+
+    def get_queryset(self):
+        epoch__gte = Images.objects.filter(inarchive=1).order_by('-epoch')[0].epoch
+        epoch__gte = epoch__gte - epoch__gte%60 # floor epoch__gte to minutes
+        return Images.objects.filter(inarchive=1, epoch__gte=epoch__gte)
+
+    serializer_class = ImageSerializer
+    http_method_names = ['get',]
+    pagination_class = LargeResultsSetPagination
+    filter_backends = (rest_framework.DjangoFilterBackend,)
+    filter_class = MostRecentImageFilter
+    ordering_fields = ('site', 'camera')
 
 
 class SiteViewSet(viewsets.ModelViewSet):
