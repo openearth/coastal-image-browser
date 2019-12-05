@@ -10,10 +10,10 @@ jobs:
           command: |  # install dependencies
             sudo pip install -r requirements.txt
             sudo pip install coverage
-      - run:
-          command: |
-            coverage run manage.py test
-            coverage report
-            coverage html
-      - store_artifacts:
-          path: htmlcov
+            #      - run:
+            #          command: |
+            #            coverage run manage.py test
+            #            coverage report
+            #            coverage html
+            #      - store_artifacts:
+            #          path: htmlcov
