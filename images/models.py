@@ -37,3 +37,18 @@ class Images(models.Model):
         managed = False
         db_table = 'Images'
         ordering = ('-epoch', 'camera')
+
+
+
+class MostRecentImages(models.Model):
+    location = models.CharField(primary_key=True, max_length=128)
+    site = models.CharField(max_length=16)
+    epoch = models.IntegerField()
+    camera = models.IntegerField()
+    image_type = models.CharField(db_column='type', max_length=16)
+
+    class Meta:
+        managed = False
+        db_table = 'MostRecentImages'
+        ordering = ('image_type', '-camera')
+
