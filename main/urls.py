@@ -27,11 +27,11 @@ class ImagesRouter(routers.DefaultRouter):
 router = ImagesRouter()
 router.register(r'sites', SiteViewSet)
 router.register(r'images', ImageViewSet)
-router.register(r'images_mostrecent', MostRecentImageViewSet, base_name='Images')
+router.register(r'images_mostrecent', MostRecentImageViewSet, basename='Images')
 
 urlpatterns = [
     url(r'^$', HomePageView.as_view()),
-    url(r'^dashboard/', include('dashboard.urls')),
+#    url(r'^dashboard/', include('dashboard.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
 ]
