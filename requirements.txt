@@ -4,4 +4,4 @@ Markdown==3.2.2 # Markdown support for the browsable API.
 django-filter==2.3.0 # Filtering support
 git+https://github.com/ernestoarbitrio/django-highcharts.git
 pandas==1.1.1
-mysqlclient==1.4.4
+mysqlclient==2.0.1
