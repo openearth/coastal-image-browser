@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/circleci-coastal-image-browser
     docker:
-      - image: circleci/python:3.6-browsers  # primary container for the build job
+      - image: circleci/python:3.8-browsers  # primary container for the build job
     steps:
       - checkout  # checkout source code to working directory
       - run:
